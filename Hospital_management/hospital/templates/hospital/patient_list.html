@@ -1,0 +1,13 @@
+<h1>Patients</h1>
+<a href="{% url 'patient_create' %}">Add Patient</a>
+<ul>
+    {% for p in patients %}
+        <li>
+            {{ p.name }} ({{ p.email }}) - {{ p.phone }}
+            <a href="{% url 'patient_update' p.id %}">Edit</a>
+            <a href="{% url 'patient_delete' p.id %}">Delete</a>
+        </li>
+    {% empty %}
+        <li>No patients yet.</li>
+    {% endfor %}
+</ul>
