@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Restaurant Menu</title>
+</head>
+<body>
+    <h2> Restaurant Menu</h2>
+    <a href="{% url 'menu_add' %}"> Add New Item</a>
+    <table border="1" cellpadding="5">
+        <tr>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th>Description</th>
+            <th>Available</th>
+            <th>Actions</th>
+        </tr>
+        {% for item in items %}
+        <tr>
+            <td>{{ item.name }}</td>
+            <td>{{ item.category }}</td>
+            <td>{{ item.price }}</td>
+            <td>{{ item.description }}</td>
+            <td>{{ item.is_available }}</td>
+            <td>
+                <a href="{% url 'menu_edit' item.id %}">Edit</a> |
+                <a href="{% url 'menu_delete' item.id %}">Delete</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="6">No items in menu.</td></tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
