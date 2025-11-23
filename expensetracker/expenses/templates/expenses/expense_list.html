@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Expense Tracker</title>
+</head>
+<body>
+    <h2>Expense Tracker</h2>
+    <a href="{% url 'expense_add' %}"> Add Expense</a>
+    <br><br>
+    <table border="1" cellpadding="6">
+        <tr>
+            <th>Title</th>
+            <th>Category</th>
+            <th>Amount</th>
+            <th>Date</th>
+            <th>Description</th>
+            <th>Actions</th>
+        </tr>
+        {% for expense in expenses %}
+        <tr>
+            <td>{{ expense.title }}</td>
+            <td>{{ expense.category }}</td>
+            <td>{{ expense.amount }}</td>
+            <td>{{ expense.date }}</td>
+            <td>{{ expense.description }}</td>
+            <td>
+                <a href="{% url 'expense_edit' expense.id %}">Edit</a> |
+                <a href="{% url 'expense_delete' expense.id %}">Delete</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="6">No expenses recorded.</td></tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
