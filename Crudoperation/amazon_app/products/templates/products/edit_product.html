@@ -1,0 +1,29 @@
+!<DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device width, initial-scale=1.0">
+      
+        <title> Edit product </title>
+        </head>
+        <body>
+            <h2>Edit product</h2>
+       <form method="post">
+        {% csrf_token %}
+        Name: <input type="text" name="name" value="{{product.name}}"><br>
+       Price: <input type="number" name="price" step="0.01" value="{{ product.price }}"><br>
+    Description: <textarea name="description">{{ product.description }}</textarea><br>
+    Stock: <input type="number" name="stock" value="{{ product.stock }}"><br>
+    <input type="submit" value="Update Product">
+  </form>
+  <a href="{% url 'product_list' %}">Back to Product List</a>
+  {% if messages %}
+    <ul>
+      {% for message in messages %}
+        <li>{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+        
+        </body>
+    </html>

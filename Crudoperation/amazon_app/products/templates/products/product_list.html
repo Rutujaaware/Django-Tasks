@@ -1,0 +1,120 @@
+!<DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product List</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background-color: #f4f4f4;
+    }
+
+    header, footer {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 15px 0;
+    }
+
+    main {
+      padding: 20px;
+      max-width: 900px;
+      margin: auto;
+      background-color:green;
+    
+    }
+
+    h2 {
+      color: #333;
+    }
+
+    a {
+      text-decoration: none;
+      color:rgb(0, 204, 0);
+      margin-right: 10px;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th, td {
+      padding: 10px;
+      border: 1px solid #ccc;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f0f0f0;
+    }
+
+    .add-product-link {
+      display: inline-block;
+      margin-bottom: 10px;
+      background-color:rgb(0, 204, 61);
+      color: white;
+      padding: 8px 12px;
+      border-radius: 4px;
+    }
+
+    .add-product-link:hover {
+      background-color: #004d99;
+    }
+
+    footer p {
+      margin: 0;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Amazon Products</h1>
+  </header>
+
+  <main>
+    <h2>All Products</h2>
+    <a href="{% url 'add_product' %}" class="add-product-link">+ Add Product</a>
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Description</th>
+        <th>Stock</th>
+        <th>Actions</th>
+      </tr>
+      {% for product in products %}
+      <tr>
+        <td>{{ product.name }}</td>
+        <td>{{ product.price }}</td>
+        <td>{{ product.description }}</td>
+        <td>{{ product.stock }}</td>
+        <td>
+          <a href="{% url 'edit_product' product.id %}">Edit</a>
+          <a href="{% url 'delete_product' product.id %}">Delete</a>
+        </td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="5">No products available.</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </main>
+<br>
+  <footer>
+    <p>&copy; 2025 Amazon product. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
